@@ -34,6 +34,29 @@ async def get_user(gender: Gender): # Gender 是上面定义的性别枚举类
     return {'student': f'This is a {gender.value} student'}
 
 
+# 将参数item_id的类型定义为int类型
+@app.get("/items/{item_id}")
+async def read_item(item_id: int):
+    return {"item_id": item_id}
+
+
+# 将参数item_name的类型定义为str类型
+@app.get("/items/{item_name}")
+def read_item(item_name: str):
+    return {"item_id": item_name}
+'''
+当我们声明了路径参数的类型，如果我们在访问链接的时候提供的参数类型不对，
+FastAPI还会自动为我们做数据校验的功能，在开发和调试与您的API交互的代码时，这非常有用。注意两点：
+
+ :所有的数据验证都是由 Pydantic实现的.
+ :你可以用同样的类型声明比如 str, float, bool 或者其他更复杂的类型.
+————————————————
+
+                            版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+                        
+原文链接：https://blog.csdn.net/my_name_is_learn/article/details/109819127
+'''
+
 if __name__=='__main__':
     uvicorn.run("main:app", reload=True)
 
